@@ -14,13 +14,25 @@ import Attributes from "../../assets/poison 1.png";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
+import { useCallback } from "react";
+import { yellow } from "@mui/material/colors";
 
 export default function PokemonCard() {
   const navigate = useNavigate();
+  const type = "eletric";
+
+  const getType = useCallback(() => {
+    switch (type) {
+      case "flame":
+        return "green";
+      case "eletric":
+        return "yellow";
+    }
+  }, []);
 
   return (
     <CardGlobal>
-      <CardContainer>
+      <CardContainer sx={{ backgroundColor: getType() }}>
         <InfosContainer>
           <Typography variant="body2" gutterBottom>
             id#03
@@ -29,7 +41,7 @@ export default function PokemonCard() {
           <AtributesCard>
             <PowerInfo>
               <img src={Attributes} alt="Atributos" />
-              poison
+              {type}
             </PowerInfo>
             <PowerInfo>
               <img src={Attributes} alt="Atributos" />
