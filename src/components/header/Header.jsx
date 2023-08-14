@@ -3,6 +3,7 @@ import Logo from "../../assets/Logo.png";
 import Button from "@mui/material/Button";
 import { goToPokedexStorage, goToHome } from "../../routes/Cordinator";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -13,12 +14,14 @@ export const Header = () => {
         <>
           <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
           <img src={Logo} />
+          <Box></Box>
         </>
       );
     }
     if (window.location.href.includes("/detail")) {
       return (
         <>
+          <Box></Box>
           <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
           <img src={Logo} />
           <Button

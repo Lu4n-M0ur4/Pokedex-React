@@ -7,7 +7,12 @@ export const StyledHeader = styled.header`
     background: #FFF;
     width: 100%;
     height: 160px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     
+
+   
   
 `
 

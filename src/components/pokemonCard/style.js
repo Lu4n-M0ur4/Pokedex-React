@@ -14,7 +14,7 @@ export const CardContainer = styled(Box)`
 
 
   height: 210px;
-  background-color: #729f92;
+  background-color: red;
   border-radius: 12px;
 `;
 
@@ -25,7 +25,7 @@ export const InfosContainer = styled(Box)`
   padding: 25px 23px;
 
   p {
-    color: #fff;
+    color: #black;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
