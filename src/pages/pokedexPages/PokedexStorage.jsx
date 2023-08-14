@@ -12,12 +12,7 @@ export const PokedexStorage = () => {
   
       <Header />
       <CardContainer>
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
+       
       </CardContainer>
     </>
   );

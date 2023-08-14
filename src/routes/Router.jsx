@@ -4,15 +4,17 @@ import PokemonDetailPage from "../pages/pokemonDetailPage/PokemonDetailPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import useRequestPokemons from "../hooks/useRequestPokemons.js/useRequestPokemons";
 
+
 export default function Router() {
+  
+  const {pokemonsList} = useRequestPokemons()
 
-const {pokemons} = useRequestPokemons() 
 
-console.log(pokemons)
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PokemonListPage />} />
+        <Route path="/" element={<PokemonListPage pokemonsList={pokemonsList} />} />
         <Route path="/storage" element={<PokedexStorage />} />
         <Route path="/detail" element={<PokemonDetailPage />} />
       </Routes>

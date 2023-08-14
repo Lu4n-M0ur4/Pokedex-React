@@ -25,7 +25,7 @@ export const InfosContainer = styled(Box)`
   padding: 25px 23px;
 
   p {
-    color: #fff;
+    color: #black;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
