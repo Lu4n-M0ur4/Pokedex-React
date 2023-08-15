@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Bulba from "../../assets/Bulba.png";
@@ -8,6 +9,7 @@ import {
   CardActions,
   CardContainer,
   CardGlobal,
+  ButtonContainer,
 } from "./style";
 
 import Attributes from "../../assets/poison 1.png";
@@ -17,13 +19,12 @@ import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function PokemonCard({ getDetail }) {
   const [pokemon, setPokemon] = useState({});
 
   useEffect(() => {
-    
-      getDetailPokemon();
-    
+    getDetailPokemon();
   }, []);
 
   const getDetailPokemon = async () => {
@@ -36,16 +37,16 @@ export default function PokemonCard({ getDetail }) {
   };
 
   const navigate = useNavigate();
-  const type = pokemon.types?.[0].type.name
+  const type = pokemon.types?.[0].type.name;
 
   const getType = useCallback(() => {
     switch (type) {
       case "poison":
         return "#AD61AE";
       case "grass":
-        return "#70B873";
+        return "#729F92";
       case "fire":
-        return "##F44900";
+        return "#F44900";
       case "flying":
         return "#6892B0";
       case "water":
@@ -79,10 +80,9 @@ export default function PokemonCard({ getDetail }) {
     }
   }, [pokemon]);
 
-
-  
   return (
-    <CardGlobal>
+    <CardGlobal >
+      
       <CardContainer sx={{ backgroundColor: getType() }}>
         <InfosContainer>
           <Typography variant="body2" gutterBottom>
@@ -99,10 +99,6 @@ export default function PokemonCard({ getDetail }) {
               {type}
             </PowerInfo>
           </AtributesCard>
-
-          <Button onClick={() => goToPokeDetail(navigate)} size="small">
-            Detail
-          </Button>
         </InfosContainer>
         <CardActions>
           <CardMedia
@@ -111,8 +107,14 @@ export default function PokemonCard({ getDetail }) {
             src={pokemon.sprites?.other.home.front_default}
             title="Pokemon"
           />
-          <Button size="small">Excluir</Button>
         </CardActions>
+        
+        <ButtonContainer>
+          <Button onClick={() => goToPokeDetail(navigate)} size="small">
+            Detail
+          </Button>
+          <Button size="small">Capturar</Button>
+        </ButtonContainer>
       </CardContainer>
     </CardGlobal>
   );

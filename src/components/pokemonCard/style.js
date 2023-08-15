@@ -12,7 +12,6 @@ export const CardContainer = styled(Box)`
   display: flex;
   min-width: 440px;
 
-
   height: 210px;
   background-color: red;
   border-radius: 12px;
@@ -25,25 +24,12 @@ export const InfosContainer = styled(Box)`
   padding: 25px 23px;
 
   p {
-    color: #black;
+    color: black;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-  }
-
-  button {
-    align-self: self-start;
-    font-size: 16px;
-    padding-top: 46px;
-    width: 74px;
-    height: 24px;
-    color: #fff;
-
-    font-weight: 600;
-    line-height: normal;
-    text-decoration-line: underline;
   }
 `;
 
@@ -77,10 +63,22 @@ export const CardActions = styled(Box)`
     display: flex;
     margin: -68px;
   }
+`;
+
+export const ButtonContainer = styled(Box)`
   button {
     z-index: 3;
     width: 100%;
     height: 100%;
     display: flex;
+    font-size: 16px;
+    padding-top: 46px;
+    width: 74px;
+    height: 24px;
+    color: #fff;
+
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
   }
 `;
