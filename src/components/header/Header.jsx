@@ -21,7 +21,7 @@ export const Header = () => {
     if (window.location.href.includes("/detail")) {
       return (
         <>
-          <Box></Box>
+         
           <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
           <img src={Logo} />
           <Button
@@ -35,6 +35,7 @@ export const Header = () => {
     } else {
       return (
         <>
+        <Box></Box>
           <img src={Logo} />
           <Button
             onClick={() => goToPokedexStorage(navigate)}
