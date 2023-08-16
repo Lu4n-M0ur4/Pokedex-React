@@ -19,9 +19,9 @@ import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
+export default function PokemonCard({ getDetail, storagePokedex ,pokeStorageDetail}) {
+  const [pokemon, setPokemon] = useState([]);
 
-export default function PokemonCard({ getDetail }) {
-  const [pokemon, setPokemon] = useState({});
 
   useEffect(() => {
     getDetailPokemon();
@@ -32,15 +32,16 @@ export default function PokemonCard({ getDetail }) {
       const response = await axios.get(getDetail);
       setPokemon(response.data);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
   const navigate = useNavigate();
   const type = pokemon.types?.[0].type.name;
-
+  const Stype = pokeStorageDetail?.types?.[0].type.name;
+  
   const getType = useCallback(() => {
-    switch (type) {
+    switch (type || Stype) {
       case "poison":
         return "#AD61AE";
       case "grass":
@@ -80,9 +81,55 @@ export default function PokemonCard({ getDetail }) {
     }
   }, [pokemon]);
 
-  return (
-    <CardGlobal >
-      
+  const getCardConditions = () => {
+    if (window.location.href.includes("/storage")) {
+      return (
+        <>
+        <CardGlobal>
+     <CardContainer sx={{ backgroundColor: getType() }}>
+       <InfosContainer>
+         <Typography variant="body2" gutterBottom>
+           {`id#${pokeStorageDetail.id}`}
+         </Typography>
+         <Typography variant="h4">{pokeStorageDetail.name}</Typography>
+         <AtributesCard>
+           <PowerInfo>
+             <img src={Attributes} alt="Atributos" />
+             {pokeStorageDetail.types?.[0].type.name}
+           </PowerInfo>
+           <PowerInfo>
+             <img src={Attributes} alt="Atributos" />
+             {pokeStorageDetail.types?.[0].type.name}
+           </PowerInfo>
+         </AtributesCard>
+       </InfosContainer>
+       <CardActions>
+         <CardMedia
+           sx={{ height: 193, width: 193 }}
+           component="img"
+           src={pokeStorageDetail.sprites?.other.home.front_default}
+           title="Pokemon"
+         />
+       </CardActions>
+
+       <ButtonContainer>
+         <Button onClick={() => goToPokeDetail(navigate)} size="small">
+           Detail
+         </Button>
+         <Button  size="small">
+           Excluir
+         </Button>
+       </ButtonContainer>
+     </CardContainer>
+   </CardGlobal>
+   </>
+       
+     );
+    }
+     else {
+      return (
+       <>        
+      <CardGlobal>
       <CardContainer sx={{ backgroundColor: getType() }}>
         <InfosContainer>
           <Typography variant="body2" gutterBottom>
@@ -108,14 +155,29 @@ export default function PokemonCard({ getDetail }) {
             title="Pokemon"
           />
         </CardActions>
-        
+
         <ButtonContainer>
           <Button onClick={() => goToPokeDetail(navigate)} size="small">
             Detail
           </Button>
-          <Button size="small">Capturar</Button>
+          <Button onClick={() => storagePokedex(pokemon) } size="small">
+            Capturar
+          </Button>
         </ButtonContainer>
       </CardContainer>
     </CardGlobal>
-  );
+    </>
+
+        
+      );
+  };
+
+}
+
+return (
+ <>
+ {getCardConditions()}
+ </>
+);
+
 }

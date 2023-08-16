@@ -5,23 +5,25 @@ import Header from "../../components/header/Header";
 
 
 
-export default function PokemonListPage({pokemonsList}) {
+export default function PokemonListPage({pokemonsList, storagePokedex}) {
   
   const getPokemon = () =>
 
     pokemonsList.map((pokemon) => { 
       return (
-        <>
-          <PokemonCard key={Date.now()} getDetail={pokemon.url}/>
-        </>
+       
+          <PokemonCard key={pokemon.name} getDetail={pokemon.url} storagePokedex={storagePokedex}/>
+      
       );
     });
 
   return (
     <>
       <Header />
-      <CardContainer>
-        {getPokemon()}
+      <CardContainer >
+        
+        {getPokemon() }
+        
       </CardContainer>
     </>
   );
