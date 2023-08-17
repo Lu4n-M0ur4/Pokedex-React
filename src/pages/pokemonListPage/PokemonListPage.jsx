@@ -9,7 +9,9 @@ export default function PokemonListPage({pokemonsList, storagePokedex}) {
   
   const getPokemon = () =>
 
-    pokemonsList.map((pokemon) => { 
+    pokemonsList
+    
+    .map((pokemon) => { 
       return (
        
           <PokemonCard key={pokemon.name} getDetail={pokemon.url} storagePokedex={storagePokedex}/>

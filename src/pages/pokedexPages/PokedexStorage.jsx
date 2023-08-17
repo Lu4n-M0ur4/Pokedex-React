@@ -1,17 +1,13 @@
+/* eslint-disable react/prop-types */
 import Header from "../../components/header/Header";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 
 import { CardContainer } from "./style";
 
 export const PokedexStorage = ({ pokedex }) => {
-
   const getPokedex = () =>
-    pokedex.map((pokemon) => {console.log(pokemon)
-      return ( 
-        
-          <PokemonCard key={pokemon.name} pokeStorageDetail={pokemon}  />
-       
-      );
+    pokedex.map((pokemon) => {
+      return <PokemonCard key={pokemon.name} pokeStorageDetail={pokemon} />;
     });
 
   return (
