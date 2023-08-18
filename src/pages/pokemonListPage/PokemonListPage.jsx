@@ -4,29 +4,35 @@ import { CardContainer } from "./Style";
 import Header from "../../components/header/Header";
 
 
+export default function PokemonListPage({
+  pokemonsList,
+  storagePokedex,
+  pokedex,
+  removePokedex
+}) {
 
-export default function PokemonListPage({pokemonsList, storagePokedex}) {
-  
   const getPokemon = () =>
-
     pokemonsList
-    
-    .map((pokemon) => { 
-      return (
-       
-          <PokemonCard key={pokemon.name} getDetail={pokemon.url} storagePokedex={storagePokedex}/>
-      
-      );
-    });
+      .filter(
+        (pokemon) =>
+          !pokedex.find(
+            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name 
+      ))
+      .map((pokemon) => {
+        return (
+          <PokemonCard
+            key={pokemon.name}
+            getDetail={pokemon.url}
+            storagePokedex={storagePokedex}
+            removePokedex={removePokedex}
+          />
+        );
+      });
 
   return (
     <>
       <Header />
-      <CardContainer >
-        
-        {getPokemon() }
-        
-      </CardContainer>
+      <CardContainer>{getPokemon()}</CardContainer>
     </>
   );
 }

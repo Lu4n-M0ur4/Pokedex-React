@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Bulba from "../../assets/Bulba.png";
+// import Bulba from "../../assets/Bulba.png";
 import {
   AtributesCard,
   InfosContainer,
@@ -23,6 +23,7 @@ export default function PokemonCard({
   getDetail,
   storagePokedex,
   pokeStorageDetail,
+  removePokedex,
 }) {
   const [pokemon, setPokemon] = useState([]);
 
@@ -122,7 +123,9 @@ export default function PokemonCard({
                 <Button onClick={() => goToPokeDetail(navigate)} size="small">
                   Detail
                 </Button>
-                <Button size="small">Excluir</Button>
+                <Button size="small" onClick={() => removePokedex(pokeStorageDetail)}>
+                  Excluir
+                </Button>
               </ButtonContainer>
             </CardContainer>
           </CardGlobal>

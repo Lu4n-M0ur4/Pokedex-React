@@ -4,10 +4,14 @@ import PokemonCard from "../../components/pokemonCard/PokemonCard";
 
 import { CardContainer } from "./style";
 
-export const PokedexStorage = ({ pokedex }) => {
+export const PokedexStorage = ({ pokedex, removePokedex }) => {
+
+  
+
+
   const getPokedex = () =>
     pokedex.map((pokemon) => {
-      return <PokemonCard key={pokemon.name} pokeStorageDetail={pokemon} />;
+      return <PokemonCard key={pokemon.name} pokeStorageDetail={pokemon} removePokedex={removePokedex}/>;
     });
 
   return (
