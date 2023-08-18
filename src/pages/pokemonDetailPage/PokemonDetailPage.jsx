@@ -17,8 +17,32 @@ import {
 import Bulba from "../../assets/Bulba.png";
 import Stats from "../../assets/stats.png";
 import Attributes from "../../assets/poison 1.png";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../constants/constans";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function PokemonDetailPage() {
+  const pokemon = useParams()
+  const [pokeDetail, setPokedetail] = useState([])
+
+  useEffect(()=>{
+    getDetailsPokemon()
+    
+
+  },[pokemon])
+
+
+  const getDetailsPokemon = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}${pokemon.pokemonName}`);
+     setPokedetail(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+console.log(pokeDetail)
+
   return (
     <>
       <Header />
@@ -29,7 +53,7 @@ export default function PokemonDetailPage() {
             <CardMedia
               sx={{ height: 193, width: 193 }}
               component="img"
-              src={Bulba}
+              src={pokeDetail.sprites?.front_default}
               title="Pokemon"
               alt="Pokemon"
             />
@@ -38,7 +62,7 @@ export default function PokemonDetailPage() {
             <CardMedia
               sx={{ height: 193, width: 193 }}
               component="img"
-              src={Bulba}
+              src={pokeDetail.sprites?.back_default}
               title="Pokemon"
               alt="Pokemon"
             />
@@ -61,9 +85,9 @@ export default function PokemonDetailPage() {
         <PokemonMovesInfoContainer>
           <PokemonContainer>
             <Typography variant="body2" gutterBottom>
-              id#03
+              ID#{pokeDetail.id}
             </Typography>
-            <Typography variant="h4">Bulbasaur</Typography>
+            <Typography variant="h4">{pokeDetail.name}</Typography>
             <Atributes>
               <Power>
                 <img src={Attributes} alt="Atributos" />
@@ -86,7 +110,8 @@ export default function PokemonDetailPage() {
         <IndexContainer>
           <PokemonZindex
             component="img"
-            src={Bulba}
+            src={pokeDetail.sprites?.other["official-artwork"]
+            .front_default}
             title="Pokemon"
             alt="Pokemon"
           />

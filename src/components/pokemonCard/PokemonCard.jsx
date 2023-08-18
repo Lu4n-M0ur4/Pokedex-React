@@ -26,6 +26,10 @@ export default function PokemonCard({
   removePokedex,
 }) {
   const [pokemon, setPokemon] = useState([]);
+  const navigate = useNavigate();
+
+
+
 
   useEffect(() => {
     getDetailPokemon();
@@ -40,7 +44,6 @@ export default function PokemonCard({
     }
   };
 
-  const navigate = useNavigate();
   const type = pokemon.types?.[0].type.name;
   const Stype = pokeStorageDetail?.types?.[0].type.name;
 
@@ -120,10 +123,13 @@ export default function PokemonCard({
               </CardActions>
 
               <ButtonContainer>
-                <Button onClick={() => goToPokeDetail(navigate)} size="small">
+                <Button onClick={() => goToPokeDetail(navigate,pokemon.name)} size="small">
                   Detail
                 </Button>
-                <Button size="small" onClick={() => removePokedex(pokeStorageDetail)}>
+                <Button
+                  size="small"
+                  onClick={() => removePokedex(pokeStorageDetail)}
+                >
                   Excluir
                 </Button>
               </ButtonContainer>
@@ -162,7 +168,7 @@ export default function PokemonCard({
               </CardActions>
 
               <ButtonContainer>
-                <Button onClick={() => goToPokeDetail(navigate)} size="small">
+                <Button onClick={() => {goToPokeDetail(navigate,pokemon.name) }} size="small">
                   Detail
                 </Button>
                 <Button onClick={() => storagePokedex(pokemon)} size="small">

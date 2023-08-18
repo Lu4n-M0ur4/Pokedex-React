@@ -10,19 +10,10 @@ export default function Router() {
   const { pokemonsList } = useRequestPokemons();
 
   const removePokedex = (pokemon) => {
-    // const isAlreadyOnPokedex = pokedex.find(
-    //   (pokemonInPokedex) => pokemonInPokedex.name === pokemon.name
-    // );
     const newPokedex = pokedex.filter(
       (pokemonRemove) => pokemonRemove.name !== pokemon.name
     );
     setPokedex(newPokedex);
-
-    console.log(pokedex);
-    // if (isAlreadyOnPokedex) {
-    //   const newPokedex = pokedex.filter((pokemon) => console.log(pokemon));
-
-    //   setPokedex(newPokedex);
   };
 
   const storagePokedex = (pokemon) => {
@@ -55,7 +46,7 @@ export default function Router() {
             <PokedexStorage pokedex={pokedex} removePokedex={removePokedex} />
           }
         />
-        <Route path="/detail" element={<PokemonDetailPage />} />
+        <Route path="/detail/:pokemonName" element={<PokemonDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
