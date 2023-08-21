@@ -17,7 +17,7 @@ import {
 import Stats from "../../assets/stats.png";
 import Attributes from "../../assets/poison 1.png";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../constants/constans";
+import { BASE_URL } from "../../utils/constans";
 import axios from "axios";
 import { useEffect, useState } from "react";
 

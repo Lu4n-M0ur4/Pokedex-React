@@ -41,16 +41,9 @@ export const AtributesCard = styled(Box)`
 
 export const PowerInfo = styled(Box)`
   display: flex;
-  padding: 5px 8px;
+  padding-top: 5px;
   align-items: flex-start;
-  gap: 17px;
-  height: auto;
-  width: auto;
-
-  border-radius: 8px;
-  border: 1px dashed rgba(255, 255, 255, 0.47);
-
-
+ 
 
 
 `;

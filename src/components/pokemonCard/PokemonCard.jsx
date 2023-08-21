@@ -1,4 +1,22 @@
 /* eslint-disable react/prop-types */
+import bug from "../../assets/pokemon-types/bug.png";
+import dark from "../../assets/pokemon-types/dark.png";
+import dragon from "../../assets/pokemon-types/dragon.png";
+import eletric from "../../assets/pokemon-types/eletric.png";
+import fairy from "../../assets/pokemon-types/fairy.png";
+import fighting from "../../assets/pokemon-types/fighting.png";
+import fire from "../../assets/pokemon-types/fire.png";
+import flying from "../../assets/pokemon-types/flying.png";
+import ghost from "../../assets/pokemon-types/ghost.png";
+import grass from "../../assets/pokemon-types/grass.png";
+import ground from "../../assets/pokemon-types/ground.png";
+import ice from "../../assets/pokemon-types/ice.png";
+import normal from "../../assets/pokemon-types/normal.png";
+import poison from "../../assets/pokemon-types/poison.png";
+import psychic from "../../assets/pokemon-types/psychic.png";
+import rock from "../../assets/pokemon-types/rock.png";
+import stell from "../../assets/pokemon-types/steel.png";
+import water from "../../assets/pokemon-types/water.png";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 // import Bulba from "../../assets/Bulba.png";
@@ -13,7 +31,7 @@ import {
 } from "./style";
 
 import Attributes from "../../assets/poison 1.png";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
@@ -42,74 +60,124 @@ export default function PokemonCard({
     }
   };
 
-  const type = pokemon.types?.[0].type.name;
-  const Stype = pokeStorageDetail?.types?.[0].type.name;
+  const getPokemonTypes = useCallback(
+    (type) => {
+      switch (type) {
+        case "poison":
+          return poison;
+        case "grass":
+          return grass;
+        case "fire":
+          return fire;
+        case "flying":
+          return flying;
+        case "water":
+          return water;
+        case "bug":
+          return bug;
+        case "normal":
+          return normal;
+        case "dark":
+          return dark;
+        case "dragon":
+          return dragon;
+        case "eletric":
+          return eletric;
+        case "fairy":
+          return fairy;
+        case "fighting":
+          return fighting;
+        case "ghost":
+          return ghost;
+        case "ground":
+          return ground;
+        case "ice":
+          return ice;
+        case "psychic":
+          return psychic;
+        case "rock":
+          return rock;
+        case "stell":
+          return stell;
+      }
+    },
+    [pokemon]
+  );
 
-  const getType = useCallback(() => {
-    switch (type || Stype) {
-      case "poison":
-        return "#AD61AE";
-      case "grass":
-        return "#729F92";
-      case "fire":
-        return "#F44900";
-      case "flying":
-        return "#6892B0";
-      case "water":
-        return "#33A4F5";
-      case "bug":
-        return "#316520";
-      case "normal":
-        return "#8A8A8A";
-      case "dark":
-        return "#5C5365";
-      case "dragon":
-        return "#0A6CBF";
-      case "eletric":
-        return "#F4D23B";
-      case "fairy":
-        return "#EC8FE6";
-      case "fighting":
-        return "#CE4069";
-      case "ghost":
-        return "#5269AC";
-      case "ground":
-        return "#D97745";
-      case "ice":
-        return "#74CEC0";
-      case "psychic":
-        return "#F67176";
-      case "rock":
-        return "#C7B78B";
-      case "stell":
-        return "#BBBBBB";
-    }
-  }, [pokemon]);
+  const getColors = useCallback(
+    (type) => {
+      switch (type) {
+        case "poison":
+          return "#AD61AE";
+        case "grass":
+          return "#729F92";
+        case "fire":
+          return "#F44900";
+        case "flying":
+          return "#6892B0";
+        case "water":
+          return "#33A4F5";
+        case "bug":
+          return "#316520";
+        case "normal":
+          return "#8A8A8A";
+        case "dark":
+          return "#5C5365";
+        case "dragon":
+          return "#0A6CBF";
+        case "eletric":
+          return "#F4D23B";
+        case "fairy":
+          return "#EC8FE6";
+        case "fighting":
+          return "#CE4069";
+        case "ghost":
+          return "#5269AC";
+        case "ground":
+          return "#D97745";
+        case "ice":
+          return "#74CEC0";
+        case "psychic":
+          return "#F67176";
+        case "rock":
+          return "#C7B78B";
+        case "stell":
+          return "#BBBBBB";
+      }
+    },
+    [pokemon]
+  );
 
-  const getTypes = () =>
-    pokeStorageDetail.types.map((type) => {
+  const getTypes = (request) =>
+    request?.types?.map((type) => {
       return (
-        <PowerInfo key={type.slot} sx={{backgroundColor: getType() }} >
-          <img style={{backgroundColor:getType()}} src={Attributes} alt="Atributos" />
-          {type.type.name}
+        <PowerInfo key={type.slot}>
+          <img
+            src={getPokemonTypes(type?.type.name)}
+            alt="Atributos"
+          />
         </PowerInfo>
       );
     });
-
-  console.log(pokeStorageDetail);
 
   const getCardConditions = () => {
     if (window.location.href.includes("/storage")) {
       return (
         <>
           <CardGlobal>
-            <CardContainer sx={{ backgroundColor: getType() }}>
+            <CardContainer
+              sx={{
+                backgroundColor: getColors(
+                  pokeStorageDetail?.types?.[0].type.name
+                ),
+              }}
+            >
               <InfosContainer>
                 <Typography variant="body2" gutterBottom>
                   {`#${pokeStorageDetail.id}`}
                 </Typography>
                 <Typography variant="h4">{pokeStorageDetail.name}</Typography>
-                <AtributesCard >{getTypes()}</AtributesCard>
+                <AtributesCard>{getTypes(pokeStorageDetail)}</AtributesCard>
               </InfosContainer>
               <CardActions>
                 <CardMedia
@@ -147,22 +215,16 @@ export default function PokemonCard({
       return (
         <>
           <CardGlobal>
-            <CardContainer sx={{ backgroundColor: getType() }}>
+            <Box>
+            <CardContainer
+              sx={{ backgroundColor: getColors(pokemon?.types?.[0].type.name) }}
+            >
               <InfosContainer>
                 <Typography variant="body2" gutterBottom>
                   {`#${pokemon.id}`}
                 </Typography>
                 <Typography variant="h4">{pokemon.name}</Typography>
-                <AtributesCard>
-                  <PowerInfo>
-                    <img src={Attributes} alt="Atributos" />
-                    {type}
-                  </PowerInfo>
-                  <PowerInfo>
-                    <img src={Attributes} alt="Atributos" />
-                    {type}
-                  </PowerInfo>
-                </AtributesCard>
+                <AtributesCard>{getTypes(pokemon)}</AtributesCard>
               </InfosContainer>
               <CardActions>
                 <CardMedia
@@ -171,8 +233,9 @@ export default function PokemonCard({
                   src={pokemon.sprites?.other["official-artwork"].front_default}
                   title="Pokemon"
                 />
+                
               </CardActions>
-
+            </CardContainer>
               <ButtonContainer>
                 <Button
                   onClick={() => {
@@ -186,7 +249,8 @@ export default function PokemonCard({
                   Capturar
                 </Button>
               </ButtonContainer>
-            </CardContainer>
+           
+              </Box>
           </CardGlobal>
         </>
       );
