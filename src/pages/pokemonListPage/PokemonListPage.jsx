@@ -25,6 +25,7 @@ export default function PokemonListPage({
             getDetail={pokemon.url}
             storagePokedex={storagePokedex}
             removePokedex={removePokedex}
+            pokedex={pokedex}
           />
         );
       });

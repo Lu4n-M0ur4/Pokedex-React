@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 export const CardGlobal = styled(Box)`
   flex: 1 0 0;
   height: 263px;
@@ -50,7 +49,10 @@ export const PowerInfo = styled(Box)`
 
   border-radius: 8px;
   border: 1px dashed rgba(255, 255, 255, 0.47);
-  background: #ad61ae;
+
+
+
+
 `;
 export const CardActions = styled(Box)`
   display: flex;

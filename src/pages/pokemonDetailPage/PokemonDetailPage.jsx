@@ -14,7 +14,6 @@ import {
   PokemonZindex,
   Power,
 } from "./style";
-import Bulba from "../../assets/Bulba.png";
 import Stats from "../../assets/stats.png";
 import Attributes from "../../assets/poison 1.png";
 import { useParams } from "react-router-dom";
@@ -23,25 +22,29 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function PokemonDetailPage() {
-  const pokemon = useParams()
+  const params = useParams()
   const [pokeDetail, setPokedetail] = useState([])
 
   useEffect(()=>{
-    getDetailsPokemon()
+    
+    
+    if(params.pokemonName){
+      getDetailsPokemon()
+    }
     
 
-  },[pokemon])
+  },[params])
 
 
   const getDetailsPokemon = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}${pokemon.pokemonName}`);
+      const response = await axios.get(`${BASE_URL}${params.pokemonName}`);
      setPokedetail(response.data)
     } catch (error) {
       console.log(error);
     }
   };
-console.log(pokeDetail)
+
 
   return (
     <>

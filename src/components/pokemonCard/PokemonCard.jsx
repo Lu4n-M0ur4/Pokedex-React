@@ -24,12 +24,10 @@ export default function PokemonCard({
   storagePokedex,
   pokeStorageDetail,
   removePokedex,
+  pokedex,
 }) {
   const [pokemon, setPokemon] = useState([]);
   const navigate = useNavigate();
-
-
-
 
   useEffect(() => {
     getDetailPokemon();
@@ -88,6 +86,18 @@ export default function PokemonCard({
     }
   }, [pokemon]);
 
+  const getTypes = () =>
+    pokeStorageDetail.types.map((type) => {
+      return (
+        <PowerInfo key={type.slot} sx={{backgroundColor: getType() }} >
+          <img style={{backgroundColor:getType()}} src={Attributes} alt="Atributos" />
+          {type.type.name}
+        </PowerInfo>
+      );
+    });
+
+  console.log(pokeStorageDetail);
+
   const getCardConditions = () => {
     if (window.location.href.includes("/storage")) {
       return (
@@ -96,19 +106,10 @@ export default function PokemonCard({
             <CardContainer sx={{ backgroundColor: getType() }}>
               <InfosContainer>
                 <Typography variant="body2" gutterBottom>
-                  {`id#${pokeStorageDetail.id}`}
+                  {`#${pokeStorageDetail.id}`}
                 </Typography>
                 <Typography variant="h4">{pokeStorageDetail.name}</Typography>
-                <AtributesCard>
-                  <PowerInfo>
-                    <img src={Attributes} alt="Atributos" />
-                    {pokeStorageDetail.types?.[0].type.name}
-                  </PowerInfo>
-                  <PowerInfo>
-                    <img src={Attributes} alt="Atributos" />
-                    {pokeStorageDetail.types?.[0].type.name}
-                  </PowerInfo>
-                </AtributesCard>
+                <AtributesCard >{getTypes()}</AtributesCard>
               </InfosContainer>
               <CardActions>
                 <CardMedia
@@ -123,7 +124,12 @@ export default function PokemonCard({
               </CardActions>
 
               <ButtonContainer>
-                <Button onClick={() => goToPokeDetail(navigate,pokemon.name)} size="small">
+                <Button
+                  onClick={() =>
+                    goToPokeDetail(navigate, pokeStorageDetail.name)
+                  }
+                  size="small"
+                >
                   Detail
                 </Button>
                 <Button
@@ -144,7 +150,7 @@ export default function PokemonCard({
             <CardContainer sx={{ backgroundColor: getType() }}>
               <InfosContainer>
                 <Typography variant="body2" gutterBottom>
-                  {`id#${pokemon.id}`}
+                  {`#${pokemon.id}`}
                 </Typography>
                 <Typography variant="h4">{pokemon.name}</Typography>
                 <AtributesCard>
@@ -168,7 +174,12 @@ export default function PokemonCard({
               </CardActions>
 
               <ButtonContainer>
-                <Button onClick={() => {goToPokeDetail(navigate,pokemon.name) }} size="small">
+                <Button
+                  onClick={() => {
+                    goToPokeDetail(navigate, pokemon.name);
+                  }}
+                  size="small"
+                >
                   Detail
                 </Button>
                 <Button onClick={() => storagePokedex(pokemon)} size="small">
