@@ -8,9 +8,9 @@ export const CardGlobal = styled(Box)`
   flex-direction: column-reverse;
 `;
 export const CardContainer = styled(Box)`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   min-width: 440px;
-
   height: 210px;
   background-color: red;
   border-radius: 12px;
@@ -43,9 +43,6 @@ export const PowerInfo = styled(Box)`
   display: flex;
   padding-top: 5px;
   align-items: flex-start;
- 
-
-
 `;
 export const CardActions = styled(Box)`
   display: flex;
@@ -56,24 +53,27 @@ export const CardActions = styled(Box)`
   img {
     z-index: 2;
     display: flex;
-    margin: -68px;
+    margin: -38px;
   }
 `;
 
 export const ButtonContainer = styled(Box)`
-  button {
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    font-size: 16px;
-    padding-top: 46px;
-    width: 74px;
-    height: 24px;
-    color: #fff;
+  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 13px;
 
-    font-weight: 600;
-    line-height: normal;
-    text-decoration-line: underline;
+  button {
+    display: flex;
+    width: 146px;
+    height: 38px;
+    padding: 4px 10px;
+    justify-content: center;
+    align-items: center;
   }
 `;

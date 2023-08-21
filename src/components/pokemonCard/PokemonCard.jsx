@@ -30,7 +30,8 @@ import {
   ButtonContainer,
 } from "./style";
 
-import Attributes from "../../assets/poison 1.png";
+
+
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
@@ -215,7 +216,7 @@ export default function PokemonCard({
       return (
         <>
           <CardGlobal>
-            <Box>
+            <Box >
             <CardContainer
               sx={{ backgroundColor: getColors(pokemon?.types?.[0].type.name) }}
             >
@@ -235,8 +236,8 @@ export default function PokemonCard({
                 />
                 
               </CardActions>
-            </CardContainer>
               <ButtonContainer>
+              
                 <Button
                   onClick={() => {
                     goToPokeDetail(navigate, pokemon.name);
@@ -245,10 +246,11 @@ export default function PokemonCard({
                 >
                   Detail
                 </Button>
-                <Button onClick={() => storagePokedex(pokemon)} size="small">
+                <Button variant="contained" onClick={() => storagePokedex(pokemon)} size="small">
                   Capturar
                 </Button>
               </ButtonContainer>
+            </CardContainer>
            
               </Box>
           </CardGlobal>
