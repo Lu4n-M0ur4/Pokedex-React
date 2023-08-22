@@ -18,7 +18,6 @@ import rock from "../../assets/pokemon-types/rock.png";
 import stell from "../../assets/pokemon-types/steel.png";
 import water from "../../assets/pokemon-types/water.png";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 // import Bulba from "../../assets/Bulba.png";
 import {
   AtributesCard,
@@ -28,11 +27,13 @@ import {
   CardContainer,
   CardGlobal,
   ButtonContainer,
+  ButtonDetailStyle,
+  ButtonCaptureStyle,
+  ModalStyle,
 } from "./style";
 
-
-
-import { Box, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import { Box, Modal, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
@@ -44,13 +45,29 @@ export default function PokemonCard({
   pokeStorageDetail,
   removePokedex,
   pokedex,
+  setOpen,
+  open,
 }) {
   const [pokemon, setPokemon] = useState([]);
+
   const navigate = useNavigate();
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 451,
+    height: 222,
+    bgcolor: "background.paper",
+    border: "2px solid #00000016",
+    boxShadow: 24,
+    p: 4,
+  };
 
   useEffect(() => {
     getDetailPokemon();
-  }, []);
+  }, [pokemon]);
 
   const getDetailPokemon = async () => {
     try {
@@ -113,19 +130,19 @@ export default function PokemonCard({
         case "grass":
           return "#729F92";
         case "fire":
-          return "#F44900";
+          return "#EAAB7D";
         case "flying":
           return "#6892B0";
         case "water":
-          return "#33A4F5";
+          return "#71C3FF";
         case "bug":
-          return "#316520";
+          return "#76A866";
         case "normal":
-          return "#8A8A8A";
+          return "#BF9762";
         case "dark":
           return "#5C5365";
         case "dragon":
-          return "#0A6CBF";
+          return "#004170";
         case "eletric":
           return "#F4D23B";
         case "fairy":
@@ -153,10 +170,7 @@ export default function PokemonCard({
     request?.types?.map((type) => {
       return (
         <PowerInfo key={type.slot}>
-          <img
-            src={getPokemonTypes(type?.type.name)}
-            alt="Atributos"
-          />
+          <img src={getPokemonTypes(type?.type.name)} alt="Atributos" />
         </PowerInfo>
       );
     });
@@ -204,6 +218,8 @@ export default function PokemonCard({
                 <Button
                   size="small"
                   onClick={() => removePokedex(pokeStorageDetail)}
+                  color="error"
+                  variant="contained"
                 >
                   Excluir
                 </Button>
@@ -216,43 +232,71 @@ export default function PokemonCard({
       return (
         <>
           <CardGlobal>
-            <Box >
-            <CardContainer
-              sx={{ backgroundColor: getColors(pokemon?.types?.[0].type.name) }}
-            >
-              <InfosContainer>
-                <Typography variant="body2" gutterBottom>
-                  {`#${pokemon.id}`}
-                </Typography>
-                <Typography variant="h4">{pokemon.name}</Typography>
-                <AtributesCard>{getTypes(pokemon)}</AtributesCard>
-              </InfosContainer>
-              <CardActions>
-                <CardMedia
-                  sx={{ height: 193, width: 193 }}
-                  component="img"
-                  src={pokemon.sprites?.other["official-artwork"].front_default}
-                  title="Pokemon"
-                />
-                
-              </CardActions>
-              <ButtonContainer>
-              
-                <Button
-                  onClick={() => {
-                    goToPokeDetail(navigate, pokemon.name);
-                  }}
-                  size="small"
+            <Box>
+              <CardContainer
+                sx={{
+                  backgroundColor: getColors(pokemon?.types?.[0].type.name),
+                }}
+              >
+                <InfosContainer>
+                  <Typography variant="body2" gutterBottom>
+                    {`#${pokemon.id}`}
+                  </Typography>
+                  <Typography variant="h4">{pokemon.name}</Typography>
+                  <AtributesCard>{getTypes(pokemon)}</AtributesCard>
+                </InfosContainer>
+                <CardActions>
+                  <CardMedia
+                    sx={{ height: 193, width: 193 }}
+                    component="img"
+                    src={
+                      pokemon.sprites?.other["official-artwork"].front_default
+                    }
+                    title="Pokemon"
+                  />
+                </CardActions>
+                <ButtonContainer>
+                  <ButtonDetailStyle
+                    onClick={() => {
+                      goToPokeDetail(navigate, pokemon.name);
+                    }}
+                    size="small"
+                    color="primary"
+                  >
+                    Detalhes!
+                  </ButtonDetailStyle>
+                  <ButtonCaptureStyle
+                    variant="contained"
+                    onClick={() => storagePokedex(pokemon)}
+                    size="small"
+                    color="inherit"
+                  >
+                    Capturar!
+                  </ButtonCaptureStyle>
+                </ButtonContainer>
+
+                <Modal
+                  sx={{ ...style }}
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
                 >
-                  Detail
-                </Button>
-                <Button variant="contained" onClick={() => storagePokedex(pokemon)} size="small">
-                  Capturar
-                </Button>
-              </ButtonContainer>
-            </CardContainer>
-           
-              </Box>
+                  <ModalStyle>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h1"
+                      component="h2"
+                    >
+                      Gotcha!
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      O Pokémon foi adicionado a sua Pokédex
+                    </Typography>
+                  </ModalStyle>
+                </Modal>
+              </CardContainer>
+            </Box>
           </CardGlobal>
         </>
       );

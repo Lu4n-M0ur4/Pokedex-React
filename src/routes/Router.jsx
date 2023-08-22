@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function Router() {
   const [pokedex, setPokedex] = useState([]);
+  const [open, setOpen] = useState(false);
   const { pokemonsList } = useRequestPokemons();
 
   const removePokedex = (pokemon) => {
@@ -24,6 +25,7 @@ export default function Router() {
     if (!isAlreadyOnPokedex) {
       const newPokedex = [...pokedex, pokemon];
       setPokedex(newPokedex);
+      setOpen(true)
     }
   };
 
@@ -37,6 +39,8 @@ export default function Router() {
               pokemonsList={pokemonsList}
               pokedex={pokedex}
               storagePokedex={storagePokedex}
+              open={open}
+              setOpen={setOpen}
             />
           }
         />

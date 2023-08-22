@@ -8,7 +8,9 @@ export default function PokemonListPage({
   pokemonsList,
   storagePokedex,
   pokedex,
-  removePokedex
+  removePokedex,
+  setOpen,
+  open,
 }) {
 
   const getPokemon = () =>
@@ -26,6 +28,8 @@ export default function PokemonListPage({
             storagePokedex={storagePokedex}
             removePokedex={removePokedex}
             pokedex={pokedex}
+            setOpen={setOpen}
+            open={open}
           />
         );
       });
