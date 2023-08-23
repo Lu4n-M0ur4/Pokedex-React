@@ -14,6 +14,9 @@ export const CardContainer = styled(Box)`
   height: 210px;
   background-color: red;
   border-radius: 12px;
+  h4{
+    text-transform: capitalize;
+  }
 `;
 
 export const InfosContainer = styled(Box)`
