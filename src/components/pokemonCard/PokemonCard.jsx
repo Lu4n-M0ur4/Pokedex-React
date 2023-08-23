@@ -29,11 +29,11 @@ import {
   ButtonContainer,
   ButtonDetailStyle,
   ButtonCaptureStyle,
-  ModalStyle,
+
 } from "./style";
 
 import Button from "@mui/material/Button";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
@@ -44,26 +44,13 @@ export default function PokemonCard({
   storagePokedex,
   pokeStorageDetail,
   removePokedex,
-  pokedex,
-  setOpen,
-  open,
+  // pokedex,
+
 }) {
   const [pokemon, setPokemon] = useState([]);
 
   const navigate = useNavigate();
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 451,
-    height: 222,
-    bgcolor: "background.paper",
-    border: "2px solid #00000016",
-    boxShadow: 24,
-    p: 4,
-  };
 
   useEffect(() => {
     getDetailPokemon();
@@ -267,7 +254,9 @@ export default function PokemonCard({
                   </ButtonDetailStyle>
                   <ButtonCaptureStyle
                     variant="contained"
-                    onClick={() => storagePokedex(pokemon)}
+                    onClick={() => {
+                      storagePokedex(pokemon);
+                    }}
                     size="small"
                     color="inherit"
                   >
@@ -275,26 +264,7 @@ export default function PokemonCard({
                   </ButtonCaptureStyle>
                 </ButtonContainer>
 
-                <Modal
-                  sx={{ ...style }}
-                  open={open}
-                  onClose={() => setOpen(false)}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <ModalStyle>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h1"
-                      component="h2"
-                    >
-                      Gotcha!
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      O Pokémon foi adicionado a sua Pokédex
-                    </Typography>
-                  </ModalStyle>
-                </Modal>
+                
               </CardContainer>
             </Box>
           </CardGlobal>

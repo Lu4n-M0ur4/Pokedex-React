@@ -11,6 +11,9 @@ export default function PokemonListPage({
   removePokedex,
   setOpen,
   open,
+  handleOpenModal,
+  handleCloseModal
+
 }) {
 
   const getPokemon = () =>
@@ -30,6 +33,8 @@ export default function PokemonListPage({
             pokedex={pokedex}
             setOpen={setOpen}
             open={open}
+            handleOpenModal={handleOpenModal}
+            handleCloseModal={handleCloseModal}
           />
         );
       });
