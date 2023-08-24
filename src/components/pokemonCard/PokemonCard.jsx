@@ -2,7 +2,7 @@
 import bug from "../../assets/pokemon-types/bug.png";
 import dark from "../../assets/pokemon-types/dark.png";
 import dragon from "../../assets/pokemon-types/dragon.png";
-import eletric from "../../assets/pokemon-types/eletric.png";
+import electric from "../../assets/pokemon-types/electric.png";
 import fairy from "../../assets/pokemon-types/fairy.png";
 import fighting from "../../assets/pokemon-types/fighting.png";
 import fire from "../../assets/pokemon-types/fire.png";
@@ -17,6 +17,7 @@ import psychic from "../../assets/pokemon-types/psychic.png";
 import rock from "../../assets/pokemon-types/rock.png";
 import stell from "../../assets/pokemon-types/steel.png";
 import water from "../../assets/pokemon-types/water.png";
+import Pokedex from "../../assets/pokedex.png"
 import CardMedia from "@mui/material/CardMedia";
 // import Bulba from "../../assets/Bulba.png";
 import {
@@ -33,7 +34,7 @@ import {
 } from "./style";
 
 import Button from "@mui/material/Button";
-import { Box, Typography } from "@mui/material";
+import { Box, Hidden, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
 import { useCallback, useEffect, useState } from "react";
@@ -44,11 +45,10 @@ export default function PokemonCard({
   storagePokedex,
   pokeStorageDetail,
   removePokedex,
-  // pokedex,
+  pokedex,
 
 }) {
   const [pokemon, setPokemon] = useState([]);
-
   const navigate = useNavigate();
 
 
@@ -86,8 +86,8 @@ export default function PokemonCard({
           return dark;
         case "dragon":
           return dragon;
-        case "eletric":
-          return eletric;
+        case "electric":
+          return electric;
         case "fairy":
           return fairy;
         case "fighting":
@@ -113,7 +113,7 @@ export default function PokemonCard({
     (type) => {
       switch (type) {
         case "poison":
-          return "#AD61AE";
+          return "#977198";
         case "grass":
           return "#729F92";
         case "fire":
@@ -129,17 +129,17 @@ export default function PokemonCard({
         case "dark":
           return "#5C5365";
         case "dragon":
-          return "#004170";
-        case "eletric":
-          return "#F4D23B";
+          return "#002540";
+        case "electric":
+          return "#fff4b7";
         case "fairy":
           return "#EC8FE6";
         case "fighting":
-          return "#CE4069";
+          return "#de829c";
         case "ghost":
-          return "#5269AC";
+          return "#7c92d4";
         case "ground":
-          return "#D97745";
+          return "#edb69b";
         case "ice":
           return "#74CEC0";
         case "psychic":
@@ -232,12 +232,22 @@ export default function PokemonCard({
                   <Typography variant="h4">{pokemon.name}</Typography>
                   <AtributesCard>{getTypes(pokemon)}</AtributesCard>
                 </InfosContainer>
-                <CardActions>
+                <CardActions >
                   <CardMedia
-                    sx={{ height: 193, width: 193 }}
+                    sx={{ height: 193, width: 193, }}
+                    style={{ zIndex:'4'}}
                     component="img"
                     src={
                       pokemon.sprites?.other["official-artwork"].front_default
+                    }
+                    title="Pokemon"
+                  />
+                  <CardMedia
+                    sx={{ height: 258.733, width: 258.733, p:0,}}
+                    style={{ margin: '-151px', zIndex:'1'}}
+                    component="img"
+                    src={
+                      Pokedex
                     }
                     title="Pokemon"
                   />
@@ -254,6 +264,7 @@ export default function PokemonCard({
                   </ButtonDetailStyle>
                   <ButtonCaptureStyle
                     variant="contained"
+                    style={{ zIndex:'10'}}
                     onClick={() => {
                       storagePokedex(pokemon);
                     }}

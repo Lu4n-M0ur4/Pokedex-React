@@ -2,7 +2,7 @@
 import bug from "../../assets/pokemon-types/bug.png";
 import dark from "../../assets/pokemon-types/dark.png";
 import dragon from "../../assets/pokemon-types/dragon.png";
-import eletric from "../../assets/pokemon-types/eletric.png";
+import electric from "../../assets/pokemon-types/electric.png";
 import fairy from "../../assets/pokemon-types/fairy.png";
 import fighting from "../../assets/pokemon-types/fighting.png";
 import fire from "../../assets/pokemon-types/fire.png";
@@ -37,7 +37,7 @@ import {
   // Power,
 } from "./style";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../utils/constans";
+import { BASE_URL, BASE_URL_DETAIL } from "../../utils/constans";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 
@@ -80,8 +80,8 @@ export default function PokemonDetailPage() {
           return dark;
         case "dragon":
           return dragon;
-        case "eletric":
-          return eletric;
+        case "electric":
+          return electric;
         case "fairy":
           return fairy;
         case "fighting":
@@ -107,7 +107,7 @@ export default function PokemonDetailPage() {
     (type) => {
       switch (type) {
         case "poison":
-          return "#AD61AE";
+          return "#977198";
         case "grass":
           return "#729F92";
         case "fire":
@@ -123,17 +123,17 @@ export default function PokemonDetailPage() {
         case "dark":
           return "#5C5365";
         case "dragon":
-          return "#004170";
-        case "eletric":
-          return "#F4D23B";
+          return "#002540";
+        case "electric":
+          return "#fff4b7";
         case "fairy":
           return "#EC8FE6";
         case "fighting":
-          return "#CE4069";
+          return "#de829c";
         case "ghost":
-          return "#5269AC";
+          return "#7c92d4";
         case "ground":
-          return "#D97745";
+          return "#edb69b";
         case "ice":
           return "#74CEC0";
         case "psychic":
@@ -165,7 +165,7 @@ export default function PokemonDetailPage() {
 
   const getDetailsPokemon = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}${params.pokemonName}`);
+      const response = await axios.get(`${BASE_URL_DETAIL}${params.pokemonName}`);
       setPokedetail(response.data);
     } catch (error) {
       console.log(error);

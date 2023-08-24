@@ -8,7 +8,7 @@ export default function useRequestPokemonsDetail(initialState) {
   useEffect(() => {
     axios
       .get(`${initialState}`)
-      .then((res) => setPokeDetail(res.data.results))
+      .then((res) => {setPokeDetail(res.data.results)})
       .catch((err) => console.log(err));
   }, []);
 
