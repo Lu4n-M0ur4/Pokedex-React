@@ -1,4 +1,9 @@
-import { Box, CardMedia } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  LinearProgress,
+  linearProgressClasses,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const DetailContainer = styled(Box)`
@@ -11,6 +16,15 @@ export const DetailContainer = styled(Box)`
   border-radius: 37.886px;
   width: auto;
   height: auto;
+
+
+  @media (max-width: 1400px) {
+  
+    display: flex;
+    flex-direction:column-reverse; 
+  
+}
+
 `;
 
 export const OverviewPokemon = styled(Box)`
@@ -41,6 +55,16 @@ export const BaseStatus = styled(Box)`
     height: auto;
   }
 `;
+export const SectionTitle = styled(Box)`
+  padding: 20px;
+
+  h5 {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+`;
 
 export const PokemonContainer = styled(Box)`
   display: flex;
@@ -54,9 +78,8 @@ export const PokemonContainer = styled(Box)`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    
   }
-  h4{
+  h4 {
     text-transform: capitalize;
   }
 `;
@@ -86,10 +109,8 @@ export const PokemonMovesInfoContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   padding-left: 47px;
-  
-  ul{
-    
-  
+
+  ul {
     list-style: none;
     display: flex;
     padding: 0;
@@ -100,7 +121,7 @@ export const PokemonMovesInfoContainer = styled(Box)`
 
 export const PokemonMoves = styled(Box)`
   display: flex;
-  
+
   flex-direction: column;
   margin-top: 53px;
   padding: 18px;
@@ -112,11 +133,11 @@ export const PokemonMoves = styled(Box)`
   background: #fff;
 `;
 export const ContainerMoves = styled(Box)`
-      overflow: scroll;
-      overflow-y: scroll;
-      overflow-x: hidden;
-    width: 292px;
-    height: 390px;
+  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 292px;
+  height: 390px;
 `;
 
 export const Moves = styled(Box)`
@@ -130,8 +151,6 @@ export const Moves = styled(Box)`
   border-radius: 12px;
   border: 1px dashed rgba(0, 0, 0, 0.14);
   background: #ececec;
-
-  
 `;
 
 export const IndexContainer = styled(Box)`
@@ -151,3 +170,15 @@ export const PokemonZindex = styled(CardMedia)`
   margin: -164px;
 `;
 
+export const StatsContainer = styled(Box)`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 30px;
+  padding: 19px 0px;
+
+  h4 {
+    justify-self: end;
+    font-size: 20px;
+  }
+`;

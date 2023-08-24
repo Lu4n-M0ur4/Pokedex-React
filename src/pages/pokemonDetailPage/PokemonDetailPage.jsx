@@ -19,7 +19,14 @@ import stell from "../../assets/pokemon-types/steel.png";
 import water from "../../assets/pokemon-types/water.png";
 import CardMedia from "@mui/material/CardMedia";
 
-import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Divider,
+  LinearProgress,
+  Typography,
+  linearProgressClasses,
+} from "@mui/material";
 import Header from "../../components/header/Header";
 
 import {
@@ -34,6 +41,8 @@ import {
   PokemonMoves,
   PokemonMovesInfoContainer,
   PokemonZindex,
+  SectionTitle,
+  StatsContainer,
   // Power,
 } from "./style";
 import { useParams } from "react-router-dom";
@@ -45,20 +54,56 @@ export default function PokemonDetailPage() {
   const params = useParams();
   const [pokeDetail, setPokedetail] = useState([]);
 
-  
-  const  getStats= () =>
-    pokeDetail?.stats?.map((stats,index) => {
-      return (
-        <ul key={index}>
-          <li>
-            <h4>{stats.base_stat}</h4>
-            <Moves>{stats.stat.name}</Moves>
+  const limitedStat = (stats) => {
+    if (stats?.base_stat >= 100) {
+      return 100;
+    } else {
+      return stats?.base_stat;
+    }
+  };
 
-          </li>
-        </ul>
+  const BorderLinearProgress = styled(LinearProgress)(({ theme, stats }) => ({
+    height: 20,
+    width: "50%",
+    borderRadius: 9,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor:
+        theme.palette.grey[theme.palette.mode === "light" ? 100 : 800],
+    },
+
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 9,
+      backgroundColor:
+        theme.palette.mode === "light" && stats.base_stat >= 50
+          ? "#ecd92d"
+          : "#ec8d0f",
+    },
+  }));
+
+  const getStats = () =>
+    pokeDetail?.stats?.map((stats, index) => {
+      return (
+        <>
+          <StatsContainer key={index}>
+            <Typography variant="h4">{stats.stat.name}</Typography>
+
+            <Typography variant="h5">{stats.base_stat}</Typography>
+
+            {/* <Box sx={{ flexGrow: 1 }}> */}
+            <BorderLinearProgress
+              stats={stats}
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.0)" }}
+              variant="determinate"
+              value={limitedStat(stats)}
+            />
+
+            {/* </Box> */}
+          </StatsContainer>
+          <Divider sx={{margin: "0 auto", width: "90%" }} light />
+        </>
       );
     });
-    
+
   const getPokemonTypes = useCallback(
     (type) => {
       switch (type) {
@@ -148,14 +193,17 @@ export default function PokemonDetailPage() {
   );
 
   const getTypes = (request) =>
-  request?.types?.map((type,index) => {
-    return (
+    request?.types?.map((type, index) => {
+      return (
         <>
-        <img key={index} src={getPokemonTypes(type?.type.name)} alt="Atributos" />
+          <img
+            key={index}
+            src={getPokemonTypes(type?.type.name)}
+            alt="Atributos"
+          />
         </>
-    );
-  });
-
+      );
+    });
 
   useEffect(() => {
     if (params.pokemonName) {
@@ -165,7 +213,9 @@ export default function PokemonDetailPage() {
 
   const getDetailsPokemon = async () => {
     try {
-      const response = await axios.get(`${BASE_URL_DETAIL}${params.pokemonName}`);
+      const response = await axios.get(
+        `${BASE_URL_DETAIL}${params.pokemonName}`
+      );
       setPokedetail(response.data);
     } catch (error) {
       console.log(error);
@@ -186,7 +236,9 @@ export default function PokemonDetailPage() {
   return (
     <>
       <Header />
-      <Typography sx={{color:'white'}}variant="h2">Detalhes</Typography>
+      <Typography sx={{ color: "white" }} variant="h2">
+        Detalhes
+      </Typography>
       <DetailContainer
         sx={{
           backgroundColor: getColors(pokeDetail?.types?.[0].type.name),
@@ -213,12 +265,10 @@ export default function PokemonDetailPage() {
           </Box>
         </OverviewPokemon>
         <BaseStatus>
-          <Box>
-            <Typography variant="h5"></Typography>
-          </Box>
-          <Box>
-            {getStats()}
-          </Box>
+          <SectionTitle>
+            <Typography variant="h5">Base Stats</Typography>
+          </SectionTitle>
+          <Box>{getStats()}</Box>
         </BaseStatus>
         <PokemonMovesInfoContainer>
           <PokemonContainer>
@@ -226,9 +276,7 @@ export default function PokemonDetailPage() {
               ID#{pokeDetail.id}
             </Typography>
             <Typography variant="h4">{pokeDetail.name}</Typography>
-            <Atributes>
-           {getTypes(pokeDetail)}
-            </Atributes>
+            <Atributes>{getTypes(pokeDetail)}</Atributes>
           </PokemonContainer>
           <PokemonMoves>
             <Typography variant="h4">Moves:</Typography>
