@@ -92,6 +92,19 @@ export const ButtonDetailStyle = styled(Button)`
   text-decoration-line: underline;
   text-transform: none;
 `;
+export const ButtonDeleteStyle = styled(Button)`
+  display: flex;
+  width: 146px;
+  height: 38px;
+  padding: 4px 10px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+background: #FF6262;
+  text-transform: none;
+`;
 export const ButtonCaptureStyle = styled(Button)`
   display: flex;
   width: 146px;

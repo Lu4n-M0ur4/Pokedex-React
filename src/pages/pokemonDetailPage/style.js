@@ -1,10 +1,15 @@
 import {
   Box,
   CardMedia,
-  LinearProgress,
-  linearProgressClasses,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
+export const TittleContainer = styled(Box)`
+padding: 60px 40px ;
+
+`
+
+
 
 export const DetailContainer = styled(Box)`
   display: flex;
@@ -70,7 +75,7 @@ export const PokemonContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 100%;
-
+  z-index: 10;
   p {
     color: #fff;
     font-family: Inter;
@@ -86,7 +91,7 @@ export const PokemonContainer = styled(Box)`
 
 export const Atributes = styled(Box)`
   display: flex;
-
+  z-index: 10;
   padding-top: 15px;
   align-items: flex-start;
   gap: 7px;
@@ -121,7 +126,7 @@ export const PokemonMovesInfoContainer = styled(Box)`
 
 export const PokemonMoves = styled(Box)`
   display: flex;
-
+  z-index: 10;
   flex-direction: column;
   margin-top: 53px;
   padding: 18px;
@@ -138,6 +143,7 @@ export const ContainerMoves = styled(Box)`
   overflow-x: hidden;
   width: 292px;
   height: 390px;
+  
 `;
 
 export const Moves = styled(Box)`
@@ -147,7 +153,7 @@ export const Moves = styled(Box)`
   margin-top: 20px;
   align-items: flex-start;
   gap: 10px;
-
+  
   border-radius: 12px;
   border: 1px dashed rgba(0, 0, 0, 0.14);
   background: #ececec;
@@ -160,6 +166,7 @@ export const IndexContainer = styled(Box)`
   height: 270px;
   justify-content: flex-start;
   align-items: center;
+  
 `;
 
 export const PokemonZindex = styled(CardMedia)`

@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
         width: 100vw;
         height: 100vh;
         background-color: #5E5E5E;
-        list-style: none
+        list-style: none;
+        overflow-x: hidden;
+    
     }
 `;

@@ -17,6 +17,7 @@ import psychic from "../../assets/pokemon-types/psychic.png";
 import rock from "../../assets/pokemon-types/rock.png";
 import stell from "../../assets/pokemon-types/steel.png";
 import water from "../../assets/pokemon-types/water.png";
+import Pokedex from "../../assets/pokedex.png";
 import CardMedia from "@mui/material/CardMedia";
 
 import { styled } from "@mui/material/styles";
@@ -43,17 +44,21 @@ import {
   PokemonZindex,
   SectionTitle,
   StatsContainer,
+  TittleContainer,
   // Power,
 } from "./style";
 import { useParams } from "react-router-dom";
-import { BASE_URL, BASE_URL_DETAIL } from "../../utils/constans";
+import {  BASE_URL_DETAIL } from "../../utils/constans";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 
-export default function PokemonDetailPage() {
+export default function PokemonDetailPage({
+  pokedex,
+  storagePokedex,
+  removePokedex,
+}) {
   const params = useParams();
   const [pokeDetail, setPokedetail] = useState([]);
-
   const limitedStat = (stats) => {
     if (stats?.base_stat >= 100) {
       return 100;
@@ -99,7 +104,7 @@ export default function PokemonDetailPage() {
 
             {/* </Box> */}
           </StatsContainer>
-          <Divider sx={{margin: "0 auto", width: "90%" }} light />
+          <Divider sx={{ margin: "0 auto", width: "90%" }} light />
         </>
       );
     });
@@ -235,10 +240,17 @@ export default function PokemonDetailPage() {
 
   return (
     <>
-      <Header />
-      <Typography sx={{ color: "white" }} variant="h2">
-        Detalhes
-      </Typography>
+      <Header
+        pokeDetail={pokeDetail}
+        pokedex={pokedex}
+        storagePokedex={storagePokedex}
+        removePokedex={removePokedex}
+      />
+      <TittleContainer>
+        <Typography sx={{ color: "white" }} variant="h2">
+          Detalhes
+        </Typography>
+      </TittleContainer>
       <DetailContainer
         sx={{
           backgroundColor: getColors(pokeDetail?.types?.[0].type.name),
@@ -287,6 +299,14 @@ export default function PokemonDetailPage() {
           <PokemonZindex
             component="img"
             src={pokeDetail.sprites?.other["official-artwork"].front_default}
+            title="Pokemon"
+            alt="Pokemon"
+          />
+          <CardMedia
+            sx={{ height: 733, width: 913 }}
+            style={{ marginRight: "344px", zIndex: "0" }}
+            component="img"
+            src={Pokedex}
             title="Pokemon"
             alt="Pokemon"
           />

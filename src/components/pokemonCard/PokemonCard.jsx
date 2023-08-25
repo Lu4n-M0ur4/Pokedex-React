@@ -30,6 +30,7 @@ import {
   ButtonContainer,
   ButtonDetailStyle,
   ButtonCaptureStyle,
+  ButtonDeleteStyle,
 
 } from "./style";
 
@@ -45,7 +46,9 @@ export default function PokemonCard({
   storagePokedex,
   pokeStorageDetail,
   removePokedex,
-  pokedex,
+  handleCloseDeleteModal,
+  handleOpenDeleteModal,
+  // pokedex,
 
 }) {
   const [pokemon, setPokemon] = useState([]);
@@ -191,25 +194,35 @@ export default function PokemonCard({
                   }
                   title="Pokemon"
                 />
+                <CardMedia
+                    sx={{ height: 258.733, width: 258.733, p:0,}}
+                    style={{ margin: '-151px', zIndex:'1'}}
+                    component="img"
+                    src={
+                      Pokedex
+                    }
+                    title="Pokemon"
+                  />
               </CardActions>
 
               <ButtonContainer>
-                <Button
+                <ButtonDetailStyle
                   onClick={() =>
                     goToPokeDetail(navigate, pokeStorageDetail.name)
                   }
                   size="small"
                 >
-                  Detail
-                </Button>
-                <Button
+                  Detalhes
+                </ButtonDetailStyle>
+                <ButtonDeleteStyle
                   size="small"
                   onClick={() => removePokedex(pokeStorageDetail)}
+                  style={{ zIndex:'8'}}
                   color="error"
                   variant="contained"
                 >
                   Excluir
-                </Button>
+                </ButtonDeleteStyle>
               </ButtonContainer>
             </CardContainer>
           </CardGlobal>
@@ -260,11 +273,11 @@ export default function PokemonCard({
                     size="small"
                     color="primary"
                   >
-                    Detalhes!
+                    Detalhes
                   </ButtonDetailStyle>
                   <ButtonCaptureStyle
                     variant="contained"
-                    style={{ zIndex:'10'}}
+                    style={{ zIndex:'8'}}
                     onClick={() => {
                       storagePokedex(pokemon);
                     }}
