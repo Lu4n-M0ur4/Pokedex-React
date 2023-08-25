@@ -23,12 +23,12 @@ export const DetailContainer = styled(Box)`
   height: auto;
 
 
-  @media (max-width: 1400px) {
+  /* @media (max-width: 1400px) {
   
     display: flex;
     flex-direction:column-reverse; 
   
-}
+} */
 
 `;
 

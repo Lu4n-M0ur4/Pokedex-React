@@ -6,11 +6,11 @@ export const StyledHeader = styled.header`
     justify-content: space-around;
     align-items: center;
     background: #FFF;
-    width: 100%;
+    width: 100vmax;
     height: 160px;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
     
 
    

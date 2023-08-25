@@ -6,6 +6,7 @@ export const CardContainer=styled(Box)`
 display: flex;
 flex-wrap: wrap;
 gap: 10px;
+padding: 5rem;
 
 `
 export const PokemonCard=styled(Box)`

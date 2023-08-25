@@ -6,4 +6,5 @@ export const CardContainer = styled(Box)`
   flex-wrap: wrap;
   gap: 10px;
   padding: 5rem;
+  width: fit-content;
 `;

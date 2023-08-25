@@ -6,6 +6,7 @@ export const CardGlobal = styled(Box)`
 
   display: flex;
   flex-direction: column-reverse;
+ 
 `;
 export const CardContainer = styled(Box)`
   display: grid;
