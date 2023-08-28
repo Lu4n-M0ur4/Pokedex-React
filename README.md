@@ -1,6 +1,6 @@
 <h1>Projeto Pokedex 🔥</h1> 
 
-### Este é o repositório oficial do Projeto, um aplicativo de compras online desenvolvido com Vite e a biblioteca Lucide/ StyledComponents /  MaterialUi. Este arquivo README fornecerá todas as informações necessárias para entender e utilizar o projeto.
+### Este é o repositório oficial do Projeto, um aplicativo de pokedex com Vite biblioteca Lucide/ StyledComponents / MaterialUi. Este arquivo README fornecerá todas as informações necessárias para entender e utilizar o projeto.
 
 <br><br>
 
