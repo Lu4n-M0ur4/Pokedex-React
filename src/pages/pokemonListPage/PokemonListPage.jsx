@@ -2,47 +2,30 @@
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 import { CardContainer } from "./Style";
 import Header from "../../components/header/Header";
+import GlobalContext from "../../globalContext/GlobalContext";
+import { useContext } from "react";
 
-
-export default function PokemonListPage({
-  pokemonsList,
-  storagePokedex,
-  pokedex,
-  removePokedex,
-  setOpen,
-  open,
-  handleOpenModal,
-  handleCloseModal
-
-}) {
+export default function PokemonListPage() {
+  const context = useContext(GlobalContext);
+  const { pokedex, pokemonsList,getModalDefault } = context;
 
   const getPokemon = () =>
     pokemonsList
       .filter(
         (pokemon) =>
           !pokedex.find(
-            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name 
-      ))
+            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
+          )
+      )
       .map((pokemon) => {
-        return (
-          <PokemonCard
-            key={pokemon.name}
-            getDetail={pokemon.url}
-            storagePokedex={storagePokedex}
-            removePokedex={removePokedex}
-            pokedex={pokedex}
-            setOpen={setOpen}
-            open={open}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
-          />
-        );
+        return <PokemonCard key={pokemon.name} getDetail={pokemon.url} />;
       });
 
   return (
     <>
       <Header />
       <CardContainer>{getPokemon()}</CardContainer>
+      {getModalDefault()}
     </>
   );
 }

@@ -48,15 +48,14 @@ import {
   // Power,
 } from "./style";
 import { useParams } from "react-router-dom";
-import {  BASE_URL_DETAIL } from "../../utils/constans";
+import { BASE_URL_DETAIL } from "../../utils/constans";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import GlobalContext from "../../globalContext/GlobalContext";
 
-export default function PokemonDetailPage({
-  pokedex,
-  storagePokedex,
-  removePokedex,
-}) {
+export default function PokemonDetailPage() {
+  const context = useContext(GlobalContext);
+  const { getModalDefault } = context;
   const params = useParams();
   const [pokeDetail, setPokedetail] = useState([]);
   const limitedStat = (stats) => {
@@ -94,15 +93,12 @@ export default function PokemonDetailPage({
 
             <Typography variant="h5">{stats.base_stat}</Typography>
 
-            {/* <Box sx={{ flexGrow: 1 }}> */}
             <BorderLinearProgress
               stats={stats}
               style={{ backgroundColor: "rgba(0, 0, 0, 0.0)" }}
               variant="determinate"
               value={limitedStat(stats)}
             />
-
-            {/* </Box> */}
           </StatsContainer>
           <Divider sx={{ margin: "0 auto", width: "90%" }} light />
         </>
@@ -240,12 +236,7 @@ export default function PokemonDetailPage({
 
   return (
     <>
-      <Header
-        pokeDetail={pokeDetail}
-        pokedex={pokedex}
-        storagePokedex={storagePokedex}
-        removePokedex={removePokedex}
-      />
+      <Header pokeDetail={pokeDetail} />
       <TittleContainer>
         <Typography sx={{ color: "white" }} variant="h2">
           Detalhes
@@ -312,6 +303,7 @@ export default function PokemonDetailPage({
           />
         </IndexContainer>
       </DetailContainer>
+      {getModalDefault()}
     </>
   );
 }

@@ -5,51 +5,53 @@ import Button from "@mui/material/Button";
 import { goToPokedexStorage, goToHome } from "../../routes/Cordinator";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import GlobalContext from "../../globalContext/GlobalContext";
 
-export const Header = ({pokedex, pokeDetail, storagePokedex, removePokedex}) => {
-const navigate = useNavigate();
+export const Header = ({ pokeDetail }) => {
+  const context = useContext(GlobalContext);
+  const {
+    pokedex,
+    removePokedex,
+    storagePokedex,
+  } = context;
 
-useEffect(() => {
-  getButtonCondition()
-}, [pokedex]);
+  const navigate = useNavigate();
 
-const allReadyInPokedex = pokedex?.find(
- (pokemonInPokedex) => pokemonInPokedex.name === pokeDetail.name)
+  useEffect(() => {
+    getButtonCondition();
+  }, [pokedex]);
 
+  const allReadyInPokedex = pokedex?.find(
+    (pokemonInPokedex) => pokemonInPokedex.name === pokeDetail?.name
+  );
 
-
- const getButtonCondition = () => {
-
-  if(allReadyInPokedex){
-    return (
-      <>
-        <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
-        <img src={Logo} />
-        <Button
-          onClick={() => removePokedex(pokeDetail)}
-          variant="contained"
-        >
-          Excluir da Pokedex
-        </Button>
-      </>
-    );
-  } else {
-    return (
-      <>
-      <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
-        <img src={Logo} />
-        <Button
-          onClick={() => storagePokedex(pokeDetail)}
-          variant="contained"
-        >
-          Capturar
-        </Button>
-      </>
-    );
-  }
-
- }
+  const getButtonCondition = () => {
+    if (allReadyInPokedex) {
+      return (
+        <>
+          <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
+          <img src={Logo} />
+          <Button onClick={() => removePokedex(pokeDetail)} variant="contained">
+            Excluir da Pokedex
+          </Button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
+          <img src={Logo} />
+          <Button
+            onClick={() => storagePokedex(pokeDetail)}
+            variant="contained"
+          >
+            Capturar
+          </Button>
+        </>
+      );
+    }
+  };
 
   const getButtonForPokemons = () => {
     if (window.location.href.includes("/storage")) {
@@ -62,15 +64,11 @@ const allReadyInPokedex = pokedex?.find(
       );
     }
     if (window.location.href.includes("/detail")) {
-      return (
-        <>
-         {getButtonCondition()}
-        </>
-      );
+      return <>{getButtonCondition()}</>;
     } else {
       return (
         <>
-        <Box></Box>
+          <Box></Box>
           <img src={Logo} />
           <Button
             onClick={() => goToPokedexStorage(navigate)}

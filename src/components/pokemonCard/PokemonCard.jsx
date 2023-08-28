@@ -17,9 +17,9 @@ import psychic from "../../assets/pokemon-types/psychic.png";
 import rock from "../../assets/pokemon-types/rock.png";
 import stell from "../../assets/pokemon-types/steel.png";
 import water from "../../assets/pokemon-types/water.png";
-import Pokedex from "../../assets/pokedex.png"
+import Pokedex from "../../assets/pokedex.png";
 import CardMedia from "@mui/material/CardMedia";
-// import Bulba from "../../assets/Bulba.png";
+
 import {
   AtributesCard,
   InfosContainer,
@@ -31,32 +31,24 @@ import {
   ButtonDetailStyle,
   ButtonCaptureStyle,
   ButtonDeleteStyle,
-
 } from "./style";
 
-import Button from "@mui/material/Button";
-import { Box, Hidden, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { goToPokeDetail } from "../../routes/Cordinator";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import GlobalContext from "../../globalContext/GlobalContext";
 
-export default function PokemonCard({
-  getDetail,
-  storagePokedex,
-  pokeStorageDetail,
-  removePokedex,
-  handleCloseDeleteModal,
-  handleOpenDeleteModal,
-  // pokedex,
+export default function PokemonCard({ getDetail, pokeStorageDetail }) {
+  const context = useContext(GlobalContext);
+  const { removePokedex, storagePokedex } = context;
 
-}) {
   const [pokemon, setPokemon] = useState([]);
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    getDetailPokemon();
+   getDetail && getDetailPokemon();
   }, [pokemon]);
 
   const getDetailPokemon = async () => {
@@ -195,14 +187,12 @@ export default function PokemonCard({
                   title="Pokemon"
                 />
                 <CardMedia
-                    sx={{ height: 258.733, width: 258.733, p:0,}}
-                    style={{ margin: '-151px', zIndex:'1'}}
-                    component="img"
-                    src={
-                      Pokedex
-                    }
-                    title="Pokemon"
-                  />
+                  sx={{ height: 258.733, width: 258.733, p: 0 }}
+                  style={{ margin: "-151px", zIndex: "1" }}
+                  component="img"
+                  src={Pokedex}
+                  title="Pokemon"
+                />
               </CardActions>
 
               <ButtonContainer>
@@ -217,7 +207,7 @@ export default function PokemonCard({
                 <ButtonDeleteStyle
                   size="small"
                   onClick={() => removePokedex(pokeStorageDetail)}
-                  style={{ zIndex:'8'}}
+                  style={{ zIndex: "8" }}
                   color="error"
                   variant="contained"
                 >
@@ -245,10 +235,10 @@ export default function PokemonCard({
                   <Typography variant="h4">{pokemon.name}</Typography>
                   <AtributesCard>{getTypes(pokemon)}</AtributesCard>
                 </InfosContainer>
-                <CardActions >
+                <CardActions>
                   <CardMedia
-                    sx={{ height: 193, width: 193, }}
-                    style={{ zIndex:'4'}}
+                    sx={{ height: 193, width: 193 }}
+                    style={{ zIndex: "4" }}
                     component="img"
                     src={
                       pokemon.sprites?.other["official-artwork"].front_default
@@ -256,12 +246,10 @@ export default function PokemonCard({
                     title="Pokemon"
                   />
                   <CardMedia
-                    sx={{ height: 258.733, width: 258.733, p:0,}}
-                    style={{ margin: '-151px', zIndex:'1'}}
+                    sx={{ height: 258.733, width: 258.733, p: 0 }}
+                    style={{ margin: "-151px", zIndex: "1" }}
                     component="img"
-                    src={
-                      Pokedex
-                    }
+                    src={Pokedex}
                     title="Pokemon"
                   />
                 </CardActions>
@@ -277,7 +265,7 @@ export default function PokemonCard({
                   </ButtonDetailStyle>
                   <ButtonCaptureStyle
                     variant="contained"
-                    style={{ zIndex:'8'}}
+                    style={{ zIndex: "8" }}
                     onClick={() => {
                       storagePokedex(pokemon);
                     }}
@@ -287,8 +275,6 @@ export default function PokemonCard({
                     Capturar!
                   </ButtonCaptureStyle>
                 </ButtonContainer>
-
-                
               </CardContainer>
             </Box>
           </CardGlobal>
