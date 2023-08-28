@@ -1,25 +1,35 @@
+/* eslint-disable react/prop-types */
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
-import { CardContainer } from "./Style";
+import { BoxSection, CardContainer, TitleSection } from "./Style";
 import Header from "../../components/header/Header";
-import { BASE_URL } from "../../constants/constans";
+import GlobalContext from "../../globalContext/GlobalContext";
+import { useContext } from "react";
 
-export default function PokemonListPage({pokemonsList}) {
-  
+
+export default function PokemonListPage() {
+  const context = useContext(GlobalContext);
+  const { pokedex, pokemonsList,getModalDefault } = context;
+
   const getPokemon = () =>
-    pokemonsList.map((pokemon) => { 
-      return (
-        <>
-          <PokemonCard key={Date.now()} getDetail={pokemon.url}/>
-        </>
-      );
-    });
+    pokemonsList
+      .filter(
+        (pokemon) =>
+          !pokedex.find(
+            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
+          )
+      )
+      .map((pokemon) => {
+        return <PokemonCard key={pokemon.name} getDetail={pokemon.url} />;
+      });
 
   return (
     <>
       <Header />
-      <CardContainer>
-        {getPokemon()}
-      </CardContainer>
+      <BoxSection>
+      <TitleSection>Todos Pokemons </TitleSection>
+      </BoxSection>
+      <CardContainer>{getPokemon()}</CardContainer>
+      {getModalDefault()}
     </>
   );
 }

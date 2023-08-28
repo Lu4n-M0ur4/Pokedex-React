@@ -1,16 +1,15 @@
 
-// import axios from "axios";
-// import { useEffect } from "react";
+import GlobalState from "./globalContext/GlobalState.jsx";
 import Router from "./routes/Router.jsx";
-// import axios from "axios";
+
   
 
 
 function App() {
   return (
-    <>
+    <GlobalState>
       <Router/>
-    </>
+    </GlobalState>
   );
 }
 
