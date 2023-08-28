@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
-import { CardContainer } from "./Style";
+import { BoxSection, CardContainer, TitleSection } from "./Style";
 import Header from "../../components/header/Header";
 import GlobalContext from "../../globalContext/GlobalContext";
 import { useContext } from "react";
+
 
 export default function PokemonListPage() {
   const context = useContext(GlobalContext);
@@ -24,6 +25,9 @@ export default function PokemonListPage() {
   return (
     <>
       <Header />
+      <BoxSection>
+      <TitleSection>Todos Pokemons </TitleSection>
+      </BoxSection>
       <CardContainer>{getPokemon()}</CardContainer>
       {getModalDefault()}
     </>

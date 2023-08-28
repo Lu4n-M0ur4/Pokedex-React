@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 export const CardGlobal = styled(Box)`
   flex: 1 0 0;
@@ -6,7 +6,6 @@ export const CardGlobal = styled(Box)`
 
   display: flex;
   flex-direction: column-reverse;
- 
 `;
 export const CardContainer = styled(Box)`
   display: grid;
@@ -15,7 +14,7 @@ export const CardContainer = styled(Box)`
   height: 210px;
   background-color: red;
   border-radius: 12px;
-  h4{
+  h4 {
     text-transform: capitalize;
   }
 `;
@@ -27,13 +26,22 @@ export const InfosContainer = styled(Box)`
   padding: 25px 23px;
 
   p {
-    color: black;
+    color: #fff;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
   }
+`;
+
+export const PokemonName = styled(Typography)`
+  color: #fff;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 
 export const AtributesCard = styled(Box)`
@@ -103,7 +111,7 @@ export const ButtonDeleteStyle = styled(Button)`
   flex-shrink: 0;
 
   border-radius: 8px;
-background: #FF6262;
+  background: #ff6262;
   text-transform: none;
 `;
 export const ButtonCaptureStyle = styled(Button)`
@@ -121,22 +129,21 @@ export const ButtonCaptureStyle = styled(Button)`
 `;
 
 export const ModalStyle = styled(Box)`
-width: 451px;
-height: 222px;
-position:absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-border-radius: 12px;
-background: #FFF;
-box-shadow:none;
-background-color:#fff;
-opacity: 1;
+  width: 451px;
+  height: 222px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+  background-color: #fff;
+  opacity: 1;
 
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-align-content: center;
-justify-content: center;
-
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 `;

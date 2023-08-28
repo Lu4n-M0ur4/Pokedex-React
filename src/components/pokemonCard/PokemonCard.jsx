@@ -31,6 +31,7 @@ import {
   ButtonDetailStyle,
   ButtonCaptureStyle,
   ButtonDeleteStyle,
+  PokemonName,
 } from "./style";
 
 import { Box, Typography } from "@mui/material";
@@ -173,7 +174,7 @@ export default function PokemonCard({ getDetail, pokeStorageDetail }) {
                 <Typography variant="body2" gutterBottom>
                   {`#${pokeStorageDetail.id}`}
                 </Typography>
-                <Typography variant="h4">{pokeStorageDetail.name}</Typography>
+                <PokemonName variant="h4">{pokeStorageDetail.name}</PokemonName>
                 <AtributesCard>{getTypes(pokeStorageDetail)}</AtributesCard>
               </InfosContainer>
               <CardActions>
@@ -232,7 +233,7 @@ export default function PokemonCard({ getDetail, pokeStorageDetail }) {
                   <Typography variant="body2" gutterBottom>
                     {`#${pokemon.id}`}
                   </Typography>
-                  <Typography variant="h4">{pokemon.name}</Typography>
+                  <PokemonName variant="h4">{pokemon.name}</PokemonName>
                   <AtributesCard>{getTypes(pokemon)}</AtributesCard>
                 </InfosContainer>
                 <CardActions>

@@ -52,6 +52,8 @@ import { BASE_URL_DETAIL } from "../../utils/constans";
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import GlobalContext from "../../globalContext/GlobalContext";
+import { PokemonName } from "../../components/pokemonCard/style";
+import { TitleSection } from "../pokemonListPage/Style";
 
 export default function PokemonDetailPage() {
   const context = useContext(GlobalContext);
@@ -238,9 +240,9 @@ export default function PokemonDetailPage() {
     <>
       <Header pokeDetail={pokeDetail} />
       <TittleContainer>
-        <Typography sx={{ color: "white" }} variant="h2">
+        <TitleSection sx={{ color: "white" }} variant="h2">
           Detalhes
-        </Typography>
+        </TitleSection>
       </TittleContainer>
       <DetailContainer
         sx={{
@@ -278,7 +280,7 @@ export default function PokemonDetailPage() {
             <Typography variant="body2" gutterBottom>
               ID#{pokeDetail.id}
             </Typography>
-            <Typography variant="h4">{pokeDetail.name}</Typography>
+            <PokemonName variant="h4">{pokeDetail.name}</PokemonName>
             <Atributes>{getTypes(pokeDetail)}</Atributes>
           </PokemonContainer>
           <PokemonMoves>

@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-import { StyledHeader } from "./style";
+import {
+  ButtonDeleteStyleHeader,
+  ButtonPokedexStyleHeader,
+  ButtonStyleHeaderBackList,
+  StyledHeader,
+} from "./style";
+
 import Logo from "../../assets/Logo.png";
 import Button from "@mui/material/Button";
 import { goToPokedexStorage, goToHome } from "../../routes/Cordinator";
@@ -7,14 +13,11 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useContext, useEffect } from "react";
 import GlobalContext from "../../globalContext/GlobalContext";
+import { ChevronLeft } from "lucide-react";
 
 export const Header = ({ pokeDetail }) => {
   const context = useContext(GlobalContext);
-  const {
-    pokedex,
-    removePokedex,
-    storagePokedex,
-  } = context;
+  const { pokedex, removePokedex, storagePokedex } = context;
 
   const navigate = useNavigate();
 
@@ -30,21 +33,32 @@ export const Header = ({ pokeDetail }) => {
     if (allReadyInPokedex) {
       return (
         <>
-          <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
+          <ButtonStyleHeaderBackList onClick={() => goToHome(navigate)}>
+          <ChevronLeft/>
+            Todos Pokémons
+          </ButtonStyleHeaderBackList>
           <img src={Logo} />
-          <Button onClick={() => removePokedex(pokeDetail)} variant="contained">
+          <ButtonDeleteStyleHeader
+            onClick={() => removePokedex(pokeDetail)}
+            variant="contained"
+            color="error"
+          >
             Excluir da Pokedex
-          </Button>
+          </ButtonDeleteStyleHeader>
         </>
       );
     } else {
       return (
         <>
-          <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
+          <ButtonStyleHeaderBackList onClick={() => goToHome(navigate)}>
+          <ChevronLeft/>
+            Todos Pokémons
+          </ButtonStyleHeaderBackList>
           <img src={Logo} />
           <Button
             onClick={() => storagePokedex(pokeDetail)}
             variant="contained"
+            sx={{ width: 226, height: 57 }}
           >
             Capturar
           </Button>
@@ -57,7 +71,11 @@ export const Header = ({ pokeDetail }) => {
     if (window.location.href.includes("/storage")) {
       return (
         <>
-          <Button onClick={() => goToHome(navigate)}>Todos Pokémons</Button>
+          
+          <ButtonStyleHeaderBackList onClick={() => goToHome(navigate)}>
+          <ChevronLeft/>
+            Todos Pokémons
+          </ButtonStyleHeaderBackList>
           <img src={Logo} />
           <Box></Box>
         </>
@@ -70,12 +88,19 @@ export const Header = ({ pokeDetail }) => {
         <>
           <Box></Box>
           <img src={Logo} />
-          <Button
+          <ButtonPokedexStyleHeader
             onClick={() => goToPokedexStorage(navigate)}
             variant="contained"
+            sx={{
+              fontSize: 24,
+              fontFamily: "Poppins",
+              fontWeight: 700,
+              fontStyle: "normal",
+              lineHeight: "",
+            }}
           >
             Pokédex
-          </Button>
+          </ButtonPokedexStyleHeader>
         </>
       );
     }
